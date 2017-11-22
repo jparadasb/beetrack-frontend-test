@@ -1,22 +1,22 @@
 import {
-  GET_USERS,
-  GET_USER,
-  GET_USERS_ERROR,
-  GET_USER_ERROR,
-  ADD_NEW_USER,
-  ADD_NEW_USER_ERROR,
-  DELETE_USER,
-  DELETE_USER_ERROR,
+  GET_CONTACTS,
+  GET_CONTACT,
+  GET_CONTACTS_ERROR,
+  GET_CONTACT_ERROR,
+  ADD_NEW_CONTACT,
+  ADD_NEW_CONTACT_ERROR,
+  DELETE_CONTACT,
+  DELETE_CONTACT_ERROR,
 } from '../constants';
 
-export const getAllUsers = (page, limit = 10) => (dispatch, getState, http) => http.get('api/users', {
+export const getAllContacts = (page, limit = 10) => (dispatch, getState, http) => http.get('api/users', {
   params: {
     _page: page,
     _limit: limit,
   },
 })
   .then(response => dispatch({
-    type: GET_USERS,
+    type: GET_CONTACTS,
     payload: {
       page,
       limit,
@@ -24,21 +24,21 @@ export const getAllUsers = (page, limit = 10) => (dispatch, getState, http) => h
     },
   }))
   .catch(error => dispatch({
-    type: GET_USERS_ERROR,
+    type: GET_CONTACTS_ERROR,
     payload: error,
   }));
 
-export const getUser = userId => (dispatch, getState, http) => http.get(`api/users/${userId}`)
+export const getContact = userId => (dispatch, getState, http) => http.get(`api/users/${userId}`)
   .then(response => dispatch({
-    type: GET_USER,
+    type: GET_CONTACT,
     payload: response,
   }))
   .catch(error => dispatch({
-    type: GET_USER_ERROR,
+    type: GET_CONTACT_ERROR,
     payload: error,
   }));
 
-export const addNewUser = ({
+export const addNewContact = ({
   name, email, description, photo,
 }) => (dispatch, getState, http) => http.post('api/users', {
   name,
@@ -47,20 +47,20 @@ export const addNewUser = ({
   photo,
 })
   .then(response => dispatch({
-    type: ADD_NEW_USER,
+    type: ADD_NEW_CONTACT,
     payload: response,
   }))
   .catch(error => dispatch({
-    type: ADD_NEW_USER_ERROR,
+    type: ADD_NEW_CONTACT_ERROR,
     payload: error,
   }));
 
-export const deleteUser = userId => (dispatch, getState, http) => http.delete(`api/users/${userId}`)
+export const deleteContact = userId => (dispatch, getState, http) => http.delete(`api/users/${userId}`)
   .then(response => dispatch({
-    type: DELETE_USER,
+    type: DELETE_CONTACT,
     payload: response,
   }))
   .catch(error => dispatch({
-    type: DELETE_USER_ERROR,
+    type: DELETE_CONTACT_ERROR,
     payload: error,
   }));

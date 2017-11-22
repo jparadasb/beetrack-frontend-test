@@ -4,11 +4,11 @@ const getInitialState = () => ({
   users: [],
 });
 
-const UsersListReducer = (state = getInitialState(), action) => {
+const ContactsListReducer = (state = getInitialState(), action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default UsersListReducer;
+export default ContactsListReducer;

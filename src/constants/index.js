@@ -1,1 +1,1 @@
-export * from './users-list-constants';
+export * from './contacts-list-constants';

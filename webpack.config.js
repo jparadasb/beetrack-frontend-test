@@ -10,11 +10,8 @@ const jsRegex = /\.(js|jsx)$/;
 const cssRegex = /\.(scss|css)/;
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: resolvePath('./src/index.html'),
-  filename: 'index.html',
-  inject: 'body',
+  inject: true,
 });
-
-console.log(resolvePath('./styles/main.scss'));
 
 module.exports = {
   entry: resolvePath('./src/index.jsx'),
@@ -34,6 +31,13 @@ module.exports = {
         test: jsRegex,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        loader: 'file-loader',
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        options: {
+          name: 'static/fonts/[name][hash:8].[ext]',
+        },
       },
       {
         test: cssRegex,
@@ -72,5 +76,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [
+    HtmlWebpackPluginConfig,
+  ],
 };

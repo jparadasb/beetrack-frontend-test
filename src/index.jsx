@@ -7,7 +7,7 @@ import ReduxPromise from 'redux-promise';
 import AxiosThunks from './middlewares/axios-thunks';
 
 import rootReducer from './reducers';
-import UserListContainer from './containers/users-list';
+import UserListContainer from './containers/contacts-list';
 
 require('./styles/main.scss');
 

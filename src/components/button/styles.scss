@@ -1,0 +1,22 @@
+@import '../../styles/vars';
+
+.btn {
+  border: none;
+  height: 34px;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  .button-text {
+    padding-left: .5em;
+  }
+}
+
+.btn-add-contact {
+  width: 100%;
+  background-color: $orange;
+  &:focus {
+    border-color: $orange;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.075) inset, 0 0px 5px $orange;
+    outline: 0 none;
+  }
+}

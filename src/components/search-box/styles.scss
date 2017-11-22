@@ -1,0 +1,32 @@
+@import '../../styles/vars';
+.search-box {
+  position: relative;
+  width: 100%;
+  .icon {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: .5em;
+    color: $orange;
+  }
+  .input {
+    width: 100%;
+    height: 34px;
+    padding-left: 2.5em;
+    border: none;
+    transition: ease-in-out, box-shadow .35s ease-in-out;
+    &:focus {
+      border-color: $orange;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.075) inset, 0 0px 5px $orange;
+      outline: 0 none;
+    }
+    &::-webkit-input-placeholder {
+      color: #E4E4E4;
+    }
+    &:-ms-input-placeholder {
+      color: #E4E4E4;
+    }
+    &::placeholder {
+      color: #E4E4E4;
+    }
+  }
+}
