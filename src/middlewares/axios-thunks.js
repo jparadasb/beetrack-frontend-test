@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const createThunkMiddleware = () => ({ dispatch, getState }) => next => (action) => {
-  if (typeof acion === 'function') {
-    const axiosClient = axios.client({
-      baseUrl: '0.0.0.0:3000',
+  if (typeof action === 'function') {
+    const axiosClient = axios.create({
+      baseURL: 'http://0.0.0.0:3000',
       responseType: 'json',
     });
 

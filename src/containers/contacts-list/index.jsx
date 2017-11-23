@@ -1,27 +1,57 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import BeetrackTitle from '../../components/beetrack-title';
 import SearchBox from '../../components/search-box';
 import Button from '../../components/button';
+import Contact from '../../components/contact';
+import Header from '../../components/header';
+import { getAllContacts, setSearchboxFilter, deleteContact } from '../../actions';
 
 require('font-awesome/css/font-awesome.css');
 require('./styles.scss');
 
-const mapStateToProps = ({ contactsListState }) => ({ contactsListState });
+const mapStateToProps = ({ contactsListState }) => ({ ...contactsListState });
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getAllContacts,
+  setSearchboxFilter,
+  deleteContact,
+}, dispatch);
 
 class ContactsListContainer extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    this.handleSearchBoxFilter = this.handleSearchBoxFilter.bind(this);
+  }
+  componentDidMount() {
+    this.props.getAllContacts();
+  }
+
+  handleSearchBoxFilter(filter) {
+    this.props.setSearchboxFilter(filter);
+  }
+
+  renderContacts() {
+    return this.props.contacts
+      .filter(elm => (elm.name.indexOf(this.props.filterText) !== -1))
+      .map(contact => (
+        <Contact
+          key={contact.id}
+          deleteContact={this.props.deleteContact}
+          {...contact}
+        />
+      ));
   }
 
   render() {
     return (
       <Grid fluid>
         <Row>
-          <Col>
+          <Col xs={12}>
             <BeetrackTitle />
           </Col>
         </Row>
@@ -33,7 +63,7 @@ class ContactsListContainer extends Component {
             lg={3}
           >
             <SearchBox
-              onChange={console.log}
+              onChange={this.handleSearchBoxFilter}
             />
           </Col>
           <Col
@@ -47,9 +77,40 @@ class ContactsListContainer extends Component {
             />
           </Col>
         </Row>
+        <Row>
+          <Col
+            xs={12}
+          >
+            <section
+              className="contacts-list"
+            >
+              <Header />
+              {this.renderContacts()}
+            </section>
+          </Col>
+        </Row>
       </Grid>
     );
   }
 }
 
-export default connect(mapStateToProps, null)(ContactsListContainer);
+const contact = PropTypes.shape({
+  id: PropTypes.number,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  photo: PropTypes.string,
+});
+
+ContactsListContainer.propTypes = {
+  getAllContacts: PropTypes.func.isRequired,
+  setSearchboxFilter: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(contact),
+  filterText: PropTypes.string.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};
+
+ContactsListContainer.defaultProps = {
+  contacts: [],
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsListContainer);

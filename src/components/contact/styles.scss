@@ -1,0 +1,44 @@
+@import '../../styles/vars';
+.contact {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: .5em;
+  .description {
+    padding: 1em 0;
+    padding-left: 1em;
+    padding-right: 2em;
+  }
+  .profile-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 1em;
+    padding-left: 1em;
+    -webkit-box-align: top;
+        -ms-flex-align: top;
+            align-items: top;
+  }
+  .profile {
+    padding: 0 .5em;
+    .photo {
+      width: 60px;
+      height: 60px;
+      border-radius: 100%;
+    }
+  }
+  .info {
+    color: #616161;
+    font-weight: 800;
+    padding-top: 1em;
+  }
+  .delete {
+    display: none;
+    font-weight: 100;
+    color: $orange;
+    cursor: pointer;
+  }
+  &:hover {
+    .delete {
+      display: block;
+    }
+  }
+}

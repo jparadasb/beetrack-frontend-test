@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
+import thunk from 'redux-thunk';
 
 import AxiosThunks from './middlewares/axios-thunks';
 
@@ -13,7 +14,7 @@ require('./styles/main.scss');
 
 const createStoreWithMiddleware = reducers => createStore(
   reducers,
-  applyMiddleware(ReduxPromise, AxiosThunks),
+  applyMiddleware(ReduxPromise, AxiosThunks, thunk),
 );
 
 class App extends Component {

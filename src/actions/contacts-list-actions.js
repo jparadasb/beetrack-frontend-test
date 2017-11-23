@@ -5,9 +5,15 @@ import {
   GET_CONTACT_ERROR,
   ADD_NEW_CONTACT,
   ADD_NEW_CONTACT_ERROR,
-  DELETE_CONTACT,
+  UPDATE_CONTACTS_LIST,
   DELETE_CONTACT_ERROR,
+  SET_SEARCHBOX_FILTER,
 } from '../constants';
+
+export const setSearchboxFilter = filterText => ({
+  type: SET_SEARCHBOX_FILTER,
+  payload: filterText,
+});
 
 export const getAllContacts = (page, limit = 10) => (dispatch, getState, http) => http.get('api/users', {
   params: {
@@ -20,7 +26,7 @@ export const getAllContacts = (page, limit = 10) => (dispatch, getState, http) =
     payload: {
       page,
       limit,
-      ...response,
+      contacts: response,
     },
   }))
   .catch(error => dispatch({
@@ -55,12 +61,16 @@ export const addNewContact = ({
     payload: error,
   }));
 
-export const deleteContact = userId => (dispatch, getState, http) => http.delete(`api/users/${userId}`)
-  .then(response => dispatch({
-    type: DELETE_CONTACT,
-    payload: response,
-  }))
-  .catch(error => dispatch({
-    type: DELETE_CONTACT_ERROR,
-    payload: error,
-  }));
+export const deleteContact = contactId => (dispatch, getState, http) => {
+  const { contacts } = getState().contactsListState;
+  return http.delete(`api/users/${contactId}`)
+    .then(() => dispatch({
+      type: UPDATE_CONTACTS_LIST,
+      payload: contacts.filter(contact => contact.id !== contactId),
+    }))
+    .catch(error => dispatch({
+      type: DELETE_CONTACT_ERROR,
+      payload: error,
+    }));
+};
+
