@@ -180,7 +180,7 @@ class ContactsListContainer extends Component {
                 <span
                   className="text-action"
                 >
-                  Anterior
+                  Página anterior
                 </span>
               </span>
             </div>
@@ -200,7 +200,7 @@ class ContactsListContainer extends Component {
                 <span
                   className="text-action"
                 >
-                  Siguiente
+                  Siguiente Página
                 </span>
                 <FontAwesome
                   size="2x"

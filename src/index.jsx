@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -17,19 +17,10 @@ const createStoreWithMiddleware = reducers => createStore(
   applyMiddleware(ReduxPromise, AxiosThunks, thunk),
 );
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
-  render() {
-    return (
-      <Provider store={createStoreWithMiddleware(rootReducer)}>
-        <UserListContainer />
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={createStoreWithMiddleware(rootReducer)}>
+    <UserListContainer />
+  </Provider>
+);
 
 render(<App />, document.getElementById('root'));
