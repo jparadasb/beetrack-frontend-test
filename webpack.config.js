@@ -79,4 +79,5 @@ module.exports = {
   plugins: [
     HtmlWebpackPluginConfig,
   ],
+  devtool: 'source-map',
 };

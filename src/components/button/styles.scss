@@ -16,7 +16,16 @@
   background-color: $orange;
   &:focus {
     border-color: $orange;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.075) inset, 0 0px 5px $orange;
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.075) inset, 0 0px 5px $orange;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.075) inset, 0 0px 5px $orange;
     outline: 0 none;
+  }
+}
+
+.btn-save-contact {
+  @extend .btn-add-contact;
+  width: initial;
+  .button-text {
+    padding: .5em;
   }
 }
